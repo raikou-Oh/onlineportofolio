@@ -3,11 +3,11 @@ class Language < ActiveRecord::Base
   validates_presence_of :language
   
   def self.normal
-    self.find :all, :conditions => ['tipe = ?',"normal"]  
+    self.find :all, :conditions => ['tipe = ?','normal']  
   end
   
   def self.programming
-    self.find :all, :conditions => ['tipe = ?", "programming"]  
+    self.find :all, :conditions => ['tipe = ?', 'programming']  
   end
   
   def self.tipe
