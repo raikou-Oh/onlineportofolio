@@ -1,0 +1,6 @@
+	<% info = Array.new(3){Hash.new}
+		info[0]['user']= review.user.username
+		info[1]['rating'] = review.rating
+		info[2]['review'] = review.review
+	%>
+	<%= div_tag create_row_div(info),:class=>"item" %> 

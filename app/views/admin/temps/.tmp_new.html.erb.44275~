@@ -1,0 +1,28 @@
+
+
+<h1>New template</h1>
+
+<% form_for(@template) do |f| %>
+  <%= f.error_messages %>
+  
+  <p>
+    <%= f.label :nama %><br />
+    <%= f.text_field :nama %>
+  </p>
+  <p>
+    <%= f.label :tanggal %><br />
+    <%= f.datetime_select :tanggal %>
+  </p>
+  <p>
+    <%= f.label :lokasi_file %><br />
+    <%= f.text_field :lokasi_file %>
+  </p>
+  <p>
+    <%= f.label :thumb %><br />
+    <%= f.text_field :thumb %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+

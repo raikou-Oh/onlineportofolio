@@ -1,0 +1,17 @@
+<% content_for :sidebar do %>
+	<%= render :partial => "sidebar" %>
+<% end %>
+
+<h1>Listing templates</h1>
+
+<% @temps.each do |template| %>
+
+<div class="container">
+	<div class="remove"><%= link_to 'x', admin_temps_path(template), :confirm => 'Are you sure?', :method => :delete %></div>
+	<div><%=h template.created_at %></div>
+	<div>
+		<%= link_to image_tag(template.picture_link), admin_temp_path(template)  %>
+	</div>
+</div>
+
+<% end %>

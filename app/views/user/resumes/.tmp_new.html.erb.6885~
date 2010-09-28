@@ -1,0 +1,42 @@
+<h1>New resume</h1>
+
+<% form_for(@resume) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :nama %><br />
+    <%= f.text_field :nama %>
+  </p>
+  <p>
+    <%= f.label :alamat %><br />
+    <%= f.text_field :alamat %>
+  </p>
+  <p>
+    <%= f.label :kota %><br />
+    <%= f.text_field :kota %>
+  </p>
+  <p>
+    <%= f.label :telepon %><br />
+    <%= f.text_field :telepon %>
+  </p>
+  <p>
+    <%= f.label :kode_post %><br />
+    <%= f.text_field :kode_pos %>
+  </p>
+  <p>
+    <%= f.label :bidang %><br />
+    <%= f.text_field :bidang %>
+  </p>
+  <p>
+    <%= f.label :foto %><br />
+    <%= f.image_field :project_file %>
+  </p>
+  <p>
+    <%= f.label :jenis_kelamin %><br />
+    <%= f.combo_box :jenis_kelamin %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', user_resumes_path %>

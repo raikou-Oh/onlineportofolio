@@ -1,0 +1,41 @@
+	<% content_for :sidebar do || %>
+		<%= render :partial=> "sidebar" %>      
+    <% end %>
+
+<% @title = "daftar project user" %>
+
+<% form_tag url_for(:action => "many_selected") do %>
+<table class="list">
+	
+<thead>
+  <tr>
+	<th colspan=4 align=left>
+		<%= submit_tag "hapus project",:name => "remove" %>
+	</th>
+  </tr>
+  <tr>
+  	<th width="1%"></th>
+    <th width="83%">Judul</th>
+    <th width="5%">Rating</th>
+    <th width="10%">Jumlah Review</th>
+    
+  </tr>
+</thead>
+<tbody>
+	<% @projects.each do |project| %>
+	  <tr>
+	  	<td><%= check_box_tag "project_ids[]", project.id %></td>
+	    <td><%= link_to project.judul, user_project_path(project) %></td>
+	    <td><%=h project.reviews.average(:rating) %></td>
+	    <td><%=h project.reviews.count %></td>
+		
+	    <td><%= link_to 'Edit', edit_user_project_path(project) %></td>	    
+	  </tr>
+	<% end %>
+	<% if @projects.count<=0 %>
+	 	<tr><td colspan="5" align="center" height="200px">blom memasukkan project</td></tr> 
+	<% end %>
+</tbody>
+</table>
+
+<% end %>

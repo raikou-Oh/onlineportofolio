@@ -1,0 +1,53 @@
+
+	<% content_for :sidebar do || %>
+		<%= render :partial=> "sidebar" %>
+		<div><%= link_to 'Show', user_project_path %></div>		     
+    <% end %>
+	
+<% form_for(@project, :url => user_project_path) do |f| %>
+  <%= f.error_messages %>  
+  <p>
+    <%= f.label :judul %><br />
+    <%= f.text_field :judul %>
+  </p>
+  <p>
+    <%= f.label :perusahaan %><br />
+    <%= f.text_field :perusahaan %>
+  </p>
+  <p>
+    <%= f.label :lama_pengerjaan %><br />
+    <%= f.text_field :lama_pengerjaan %>
+  </p>
+  <p>
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.label :job_desc %><br />
+    <%= f.text_field :job_desc, :size => "30" %>
+  </p>
+  <p>
+    <%= f.label :deskripsi %><br />
+    <%= f.text_field :deskripsi, :size => "50x10" %>
+  </p>
+
+  
+  <%  
+item = ""
+ts = Tool.all 
+ts.each do |t|
+	checkbox = check_box_tag("project[tool_list][#{t.id}]","1",@project.tools.detect{|d| d == t})
+	item += span_tag(checkbox+t.nama_tool.to_s,:style => "display:block;")
+end 
+%>
+<%= div_tag "Tool yang dikuasai",:class => "accordion title" %>
+<%= div_tag item,:class => "item" %>
+
+  <p>
+    <%= f.label :deskripsi %><br />
+    <%= f.text_field :deskripsi %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

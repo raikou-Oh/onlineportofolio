@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  project_id: MyString
+  user_id: MyString
+  judul: MyString
+  perusahaan: MyString
+  rating: 1
+  lama_pengerjaan: 1
+  url: MyString
+  job_desc: MyString
+  project_file: 
+  tentang_grup: MyString
+
+two:
+  project_id: MyString
+  user_id: MyString
+  judul: MyString
+  perusahaan: MyString
+  rating: 1
+  lama_pengerjaan: 1
+  url: MyString
+  job_desc: MyString
+  project_file: 
+  tentang_grup: MyString

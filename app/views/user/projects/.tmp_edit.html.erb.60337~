@@ -1,0 +1,53 @@
+
+	<% content_for :sidebar do || %>
+		<%= render :partial=> "sidebar" %>      
+    <% end %>
+
+<h1>Editing project</h1>
+
+<% form_for(@project, :url => user_project_path) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :project_id %><br />
+    <%= f.text_field :project_id %>
+  </p>
+  <p>
+    <%= f.label :judul %><br />
+    <%= f.text_field :judul %>
+  </p>
+  <p>
+    <%= f.label :perusahaan %><br />
+    <%= f.text_field :perusahaan %>
+  </p>
+  <p>
+    <%= f.label :rating %><br />
+    <%= f.text_field :rating %>
+  </p>
+  <p>
+    <%= f.label :lama_pengerjaan %><br />
+    <%= f.text_field :lama_pengerjaan %>
+  </p>
+  <p>
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.label :job_desc %><br />
+    <%= f.text_field :job_desc %>
+  </p>
+  <p>
+    <%= f.label :project_file %><br />
+    <%= f.text_field :project_file %>
+  </p>
+  <p>
+    <%= f.label :deskripsi %><br />
+    <%= f.text_field :deskripsi %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', user_projects_path %> |
+<%= link_to 'Back', user_projects_path %>

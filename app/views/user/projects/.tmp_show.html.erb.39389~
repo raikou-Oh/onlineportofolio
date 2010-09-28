@@ -1,0 +1,52 @@
+	<% content_for :sidebar do || %>
+		<%= render :partial=> "sidebar" %>      
+    <% end %>
+	
+<%= link_to 'Edit', edit_user_project_path(@project) %> |
+<%= link_to 'Back', user_projects_path %>
+
+	<table class="info">
+		<thead>
+			<tr>
+				<th colspan=2><%= @project.judul %></th>
+			</tr>
+			<tr>
+				<th colspan=2><%= @project.project_file %></th>
+			</tr>		
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td width="20%">nama perusahaan :</td>
+			<td><%= @project.perusahaan %></td>
+		</tr>
+		<tr>
+			<td>Rating :</td>
+			<td><%= @project.rating %></td>
+		</tr>
+		<tr>
+			<td>lama pengerjaan :</td>
+			<td><%= @project.lama_pengerjaan %></td>
+		</tr>
+		<% if @project.url %>
+		<tr>
+			<td>link menuju project :</td>
+			<td><%= @project.url %></td>
+		</tr>
+		<% end %>
+		<tr>
+			<td>pekerjaan :</td>
+			<td><%= @project.job_desc %></td>
+		</tr>
+		<tr>
+			<td>tentang project :</td>
+			<td><%= @project.deskripsi %></td>
+		</tr>
+		</tbody>
+	</table>
+
+      	
+  	<%= render :partial => "parts" %>		
+  
+    	
+  

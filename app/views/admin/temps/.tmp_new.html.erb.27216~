@@ -1,0 +1,26 @@
+<% content_for :sidebar do %>
+	<%= render :partial => "sidebar" %>
+<% end %>
+
+<h1>New template</h1>
+
+<% form_for(@temp,:url => admin_temps_url,:html => {:multipart => true} ) do |f| %>
+  <%= f.error_messages %>
+  
+  <p>
+    <%= f.label :nama %><br />
+    <%= f.text_field :nama %>
+  </p>
+  <p>
+    <%= f.label :lokasi_file %><br />
+    <%= f.text_field :lokasi_file %>
+  </p>
+  <p>
+    <%= f.label :thumb %><br />
+    <%= f.file_field :thumb %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+

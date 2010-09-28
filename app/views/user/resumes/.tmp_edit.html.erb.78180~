@@ -1,0 +1,60 @@
+<h1>Editing resume</h1>
+
+<% form_for(@resume, :url => user_resume_path) do |f| %>
+  <%= f.error_messages %>
+	<fieldset>
+		<legend>Data Diri</legend>
+		<%= f.label :nama %>  <%= f.text_field :nama %>
+		<br /><%= f.label :tanggal_lahir %>  <%= f.date_select :tanggal_lahir %>
+		<br /><%= f.label :jenis_kelamin %>   <%= f.select :jenis_kelamin, {"laki-laki" => "M", "perempuan" => "P"} %>
+	</fieldset>
+  
+	<fieldset><legend>Tempat Tinggal</legend>
+		<%= f.label :alamat %>  <%= f.text_field :alamat %>
+		<br><%= f.label :kota %>  <%= f.text_field :kota %>
+		<br><%= f.label :telepon %>  <%= f.text_field :telepon %>
+		<br><%= f.label :kode_pos %>  <%= f.text_field :kode_pos %>
+	</fieldset>
+  
+	<fieldset><legend>Bidang Pekerjaan</legend>
+		<%= f.label :bidang %>	<%= f.text_field :bidang %>
+  	</fieldset>
+	
+	<fieldset><legend>Riwayat Pekerjaan</legend>
+		<div id="works">
+	 		<%= render :partial => "work", 
+					:collection => @resume.work_histories %>
+	 		<%= add_link "tambah",:works, "work", Work.new %>
+	 	</div>
+	</fieldset>
+	
+	<%= collection_select :tools, @resume, Tool.find(:all, :order => 'nama_tool ASC'), :tool_id, :nama_tool,{ :multiple => true, :name => 'resume[tools][]' } %>
+	
+	<fieldset><legend>Riwayat Pendidikan</legend>
+		<div id="educations">
+	 		<%= render :partial => "education", 
+				:collection => @resume.education_histories %>
+	 		<%= add_link "tambah",:educations, "education", Education.new %>
+	 	</div>	
+	</fieldset>
+
+	<fieldset><legend>Sertifikasi</legend>
+	 	<div id="certifications">
+	 		<%= render :partial => "certification", 
+					:collection => @resume.certifications %>
+	 		<%= add_link "tambah",:certifications, "certification", Certification.new %>
+	 	</div>
+	</fieldset>
+	
+	<fieldset><legend>Informasi Lain</legend>
+	<div id="generals">
+ 		<%= render :partial => "general", 
+				:collection => @resume.generals %>
+ 		<%= add_link "tambah informasi lain: ",:generals, "general", General.new %>
+ 	</div>	
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', user_resumes_path %>

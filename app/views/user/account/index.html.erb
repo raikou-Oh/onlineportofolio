@@ -1,0 +1,34 @@
+	<% content_for :sidebar do || %>
+		<%= render :partial=> "sidebar" %>      
+    <% end %>
+	
+<h1>Account</h1>
+Screenshot dari template yang digunakan:
+<%= 
+if @user.template
+div_tag image_tag(@user.template.picture_link,:size => "500x300"),:class=> "center" 
+end 
+%>
+<%
+item = Array.new(4){Hash.new}
+
+item[0]["Username:"]= @user.username
+item[1]["Password:"]= link_to "ubah password", :controller => "user/account",:action => "changepassword"
+item[2]["Email:"]= @user.email
+item[3]["Tanggal Pendaftaran:"]= @user.created_at
+%>
+<div class="item">
+	<%= create_row_div item %>
+	<div class="row">
+		<div>status resume:</div>
+		<div><%=h @user.open_resume ? "resume anda terbuka untuk umum" : "hanya member yang dapat melihat resume anda" %></div>
+	</div>
+	<div class="row">
+		<div>status pesan:</div>
+		<div><%=h @user.message ? "semua user dapat mengirimkan pesan pada anda" : "hanya member yang dapat mengirimkan pesan" %></div>
+	</div>
+	<div class="row">
+		<div>status informasi personal:</div>
+		<div><%=h @user.info_exp ? "data personal anda terbuka untuk umum" : "hanya member" %></div>
+	</div>
+</div>

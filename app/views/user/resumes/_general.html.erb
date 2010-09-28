@@ -1,0 +1,21 @@
+<div class="general">
+<% 
+status = general.new_record? ? 'new' : 'existing' 
+prefix = "resume[#{status}_general][]" 
+fields_for prefix, general do |cf|
+	if status=='new'
+		tahun = DateTime.now.year
+	else
+		tahun  = general.tahun.to_i
+		prefix = "resume[#{status}_general][#{general.id}]"
+	end	
+	tahun = select_year(tahun, :prefix => "#{prefix+"[tahun]"}", :discard_type => true ,:start_year => 1960)	
+	item = Array.new(4){Hash.new}
+	item[0][" "] = div_tag(link_to_function "|x|" , "$(this).up('.general').remove()",:class=> "fl_r" ) 
+	item[1]["tahun:"] = tahun
+	item[2]["judul:"] = cf.text_field :judul
+	item[3]["deskripsi:"] = cf.text_area :deskripsi,:size => "50x7"	
+%>
+<%= div_tag create_row_div(item) %>
+<% end -%>
+</div>

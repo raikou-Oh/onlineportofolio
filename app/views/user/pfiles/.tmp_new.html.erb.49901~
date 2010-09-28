@@ -1,0 +1,25 @@
+	<% content_for :sidebar do || %>
+		<%= render :partial=> "user/projects/sidebar" %> 	    
+    <% end %>
+
+<% form_for (@pfile, :url => user_pfiles_path, :html => {:multipart => true}) do |f| %>
+  <%= f.error_messages %>
+  <%= hidden_field_tag :project_id, params[:projectid] %>
+  <div class="edit">
+  	<div>
+		<div><%= f.label :file %></div>
+		<div><%= f.file_field :file %></div>
+	</div>
+	<div>
+  		<div><%= f.label :judul %></div>
+		<div><%= f.text_field :judul %></div>
+  	</div>	
+	<div>
+		<div><%= f.label :deskripsi %></div>
+		<div><%= f.text_field :deskripsi %></div>
+	</div>
+	<div>
+		<%= f.submit 'Create' %>
+	</div>
+  </div>  
+<% end %>

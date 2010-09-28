@@ -1,0 +1,24 @@
+<div class="education">
+<% 
+status = education.new_record? ? 'new' : 'existing' 
+prefix = "resume[#{status}_edu][]"
+fields_for prefix, education do |ed|	
+	if status=='new'
+		awal = akhir = DateTime.now.year
+	else
+		awal  = education.awal.to_i
+		akhir = education.akhir.to_i
+		prefix = "resume[#{status}_edu][#{education.id}]"
+	end	
+	awal = select_year(awal, :prefix => "#{prefix+"[awal]"}", :discard_type => true ,:start_year => 1960)
+	akhir = select_year(akhir, :prefix => "#{prefix+"[akhir]"}", :discard_type => true ,:start_year => 1960)
+	item = Array.new(4){Hash.new}
+	item[0][" "] = div_tag(link_to_function "<b>x</b>" , "$(this).up('.education').remove()",:style=> "float:right") 
+	item[1]["tahun:"] = "#{awal} - #{akhir}"
+	item[2]["sekolah:"] = "#{ed.select :tingkat, {"TK" => "0", "SD" => "1", "SMP" => "2", "SMA" => "3"}}.#{ ed.text_field :nama_sekolah}"
+	item[3]["nilai:"] = ed.text_field :nilai,:size => 4	
+%>
+<%= div_tag create_row_div(item) %>
+	
+<% end -%>
+</div>

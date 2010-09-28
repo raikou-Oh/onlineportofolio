@@ -1,0 +1,27 @@
+	<% content_for :sidebar do || %>
+		<%= render :partial=> "sidebar" %> 
+		<%= link_to 'Back', user_messages_path %>     
+    <% end %>
+	
+<% form_for @message, :url => user_messages_path do |f| %>
+  <%= f.error_messages %>
+  <table>
+  	<tr>
+  		<td width="20%"><%= f.label :user_id %></td>
+		<td><%= collection_select :message ,:user_id ,User.find_except(@logon_uid),:user_id, :username %></td>
+  	</tr>
+	<tr>
+		<td><%= f.label :subjek %></td>
+		<td><%= f.text_field :subjek,:size => 100 %></td>
+	</tr>
+	<tr>
+		<td colspan=2><%= f.label :pesan %><br>		
+			<%= f.text_area :pesan, :cols => 100 %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 valign="center"><%= f.submit 'Kirim' %></td>
+	</tr>
+  </table>
+<% end %>
+

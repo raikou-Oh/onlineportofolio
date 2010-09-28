@@ -1,0 +1,20 @@
+<div class="work">
+<% 
+status = work.new_record? ? 'new' : 'existing'
+prefix = case status
+	when 'new' then 'resume[new_work][][]'
+	when 'existing' then 'resume[existing_work][]'
+end
+fields_for prefix, work do |wk|
+	awal = wk.date_select(:awal, :order => [:month,:year], :start_year => 1960)
+	akhir = wk.date_select(:akhir, :start_year => 1960, :order => [:month,:year])
+	item = Array.new(5){Hash.new}
+	item[0][" "] = div_tag(link_to_function "<b>|x|</b>" , "$(this).up('.work').remove()",:class=> "fl_r" )
+	item[1]["tahun:"] = awal + " sampai " + akhir
+	item[2]["perusahaan:"] = wk.text_field :perusahaan
+	item[3]["posisi:"] = wk.text_field :posisi
+	item[4]["bidang:"] = wk.text_field :bidang
+%>
+<%= div_tag create_row_div(item) %>
+<% end -%>
+</div>

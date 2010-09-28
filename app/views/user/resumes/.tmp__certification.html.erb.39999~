@@ -1,0 +1,22 @@
+<div class="certification">
+<% 
+status = certification.new_record? ? 'new' : 'existing' 
+prefix = "resume[#{status}_certification][]"
+
+item = Array.new(5){Hash.new} 
+fields_for prefix, certification do |cf|	
+	if status=='existing'
+		prefix = "resume[#{status}_certification][#{certification.id}]"
+	end	
+ 
+	tahun = status=='new' ? DateTime.now.year : certification.tahun.to_i		
+	tahun = select_year(tahun, :prefix => "#{prefix+"[tahun]"}", :discard_type => true ,:start_year => 1960)
+	item[0][" "] = div_tag(link_to_function "<b>x</b>" , "$(this).up('.certification').remove()",:class=> "fl_r") 
+	item[1]["diperoleh tahun:"] = "#{tahun}"
+	item[2]["dikeluarkan oleh:"] = cf.text_field(:oleh)
+	item[3]["Judul:"] = cf.text_field(:judul)
+	item[4]["deskripsi:"] = cf.text_area :deskripsi,:size => "100x7"
+end 
+%>
+<%= div_tag create_row_div( item ) %>
+</div>

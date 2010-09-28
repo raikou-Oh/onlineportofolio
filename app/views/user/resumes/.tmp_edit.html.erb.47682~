@@ -1,0 +1,105 @@
+	<% content_for :sidebar do || %>
+		<%= render :partial=> "sidebar" %>      
+    <% end %>
+
+<% form_for(@resume, :url => user_resume_path) do |f| %>
+  <%= f.error_messages %>  
+
+<div class="accordion title">Data Diri</div>
+<div class="item">
+	<div>	
+		<div><%= f.label :nama %></div>
+		<div><%= f.text_field :nama %></div>	
+	</div>
+	<div>
+		<div><%= f.label :tanggal_lahir %></div>
+		<div><%= f.date_select :tanggal_lahir,:order => [:day, :month, :year ],:start_year => 1940 %></div>	
+	</div>
+	<div>
+		<div><%= f.label :jenis_kelamin %></div>
+		<div><%= f.select :jenis_kelamin, {"laki-laki" => "M", "perempuan" => "P"} %></div>	
+	</div>
+</div>
+  
+<div class="accordion title">Tempat Tinggal</div>
+<div class="item">
+	<div>	
+		<div><%= f.label :alamat %></div>
+		<div><%= f.text_field :alamat %></div>
+	</div>
+	<div>
+		<div><%= f.label :kota %></div>
+		<div><%= f.text_field :kota %></div>
+	</div>
+	<div>
+		<div><%= f.label :telepon %></div>
+		<div><%= f.text_field :telepon %></div>
+	</div>
+	<div>
+		<div><%= f.label :kode_pos %></div>
+		<div><%= f.text_field :kode_pos %></div>
+	</div>
+</div>
+
+<div class="accordion title">Bidang Pekerjaan</div>
+<div class="item">
+	<div>
+		<div><%= f.label :bidang %></div>
+		<div><%= f.text_field :bidang %></div>
+	</div>
+</div> 
+
+	<div class="accordion title">Riwayat Pekerjaan</div>
+	<div id="works" class="item ex">
+	 		<%= render :partial => "work", :collection => @resume.work_histories %>
+	 		<%= add_link "tambah",:works, "work", Work.new %>
+	</div>
+	
+	<div class="accordion title">Riwayat Pendidikan</div>
+	<div id="educations" class="item ex">
+	 		<%= render :partial => "education", 
+				:collection => @resume.education_histories %>
+	 		<%= add_link "tambah",:educations, "education", Education.new %>
+	</div>
+
+	
+<%  
+item = ""
+ts = Tool.all 
+ts.each do |t|
+	checkbox = check_box_tag("resume[tool_list][#{t.id}]","1",@resume.tools.detect{|d| d == t})
+	item += span_tag(checkbox+t.nama_tool.to_s,:style => "display:block;")
+end 
+%>
+<%= div_tag "Tool yang dikuasai",:class => "accordion title" %>
+<%= div_tag item,:class => "item" %>
+
+	
+<%
+item = ""
+lang = Language.all 	
+lang.each do |t|
+	checkbox = check_box_tag("resume[lang_list][#{t.id}]","1",@resume.languages.detect{|d| d == t})
+	item += span_tag(checkbox+t.language.to_s,:style => "display:block;") %>
+<% end %>
+<%= div_tag "Bahasa yang dikuasai",:class => "accordion title" %>	
+<%= div_tag item,:class => "item" %>
+
+	<div class="accordion title">Sertifikasi</div>
+	<div id="certifications" class="item">
+	 	<%= render :partial => "certification", 
+					:collection => @resume.certifications %>
+	 	<%= add_link "tambah",:certifications, "certification", Certification.new %>
+	</div>
+	
+	<div class="accordion title">Informasi Lain</div>
+	<div id="generals" class="item">
+	 	<%= render :partial => "general", 
+				:collection => @resume.generals %>
+ 		<%= add_link "tambah informasi lain: ",:generals, "general", General.new %>
+	</div>
+	<div>
+		
+	    <%= f.submit 'Update' %>
+	</div>
+<% end %>

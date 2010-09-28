@@ -1,0 +1,20 @@
+<% if resume = @resume %>  
+<h1>Listing resumes</h1>
+	<%= resume.nama %>	
+	<%= resume.alamat %>
+	<%= resume.kota %>
+	<%= resume.kode_pos %>
+	<%= resume.telepon %>
+	<%= resume.bidang %>
+	<%= resume.marital %>
+  
+	<% @edu.each do |edu|%>
+		<%= edu.marital %>
+	<% end %>
+  	<%= link_to 'Edit', edit_resume_path(@resume) %> |
+	<%= link_to 'Back', resumes_path %>
+<% else %>
+	Anda belum membuat resume<br>
+	Untuk membuat resume baru tekan <%= link_to 'disini', new_resume_path %>
+<% end %>
+<br />

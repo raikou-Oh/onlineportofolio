@@ -1,0 +1,19 @@
+<% content_for :sidebar do %>
+	<%= render :partial => "sidebar" %>
+	<%= link_to 'Edit', edit_admin_temp_path(@temp) %> |
+<% end %>
+
+<p>
+  <b>Tanggal:</b>
+  <%=h @temp.created_at %>
+</p>
+
+<p>
+  <b>Used by:</b>
+  <%=h @temp.users.count %> user
+</p>
+
+<p>
+  <b>Thumb:</b><br>
+  <%= image_tag @temp.picture_link,:size => "500x300" %>
+</p>

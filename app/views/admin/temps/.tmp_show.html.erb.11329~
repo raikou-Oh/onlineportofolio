@@ -1,0 +1,28 @@
+<p>
+  <b>Template:</b>
+  <%=h @template.template_id %>
+</p>
+
+<p>
+  <b>Nama:</b>
+  <%=h @template.nama %>
+</p>
+
+<p>
+  <b>Tanggal:</b>
+  <%=h @template.tanggal %>
+</p>
+
+<p>
+  <b>Lokasi file:</b>
+  <%=h @template.lokasi_file %>
+</p>
+
+<p>
+  <b>Thumb:</b>
+  <%=h @template.thumb %>
+</p>
+
+
+<%= link_to 'Edit', edit_template_path(@template) %> |
+<%= link_to 'Back', templates_path %>

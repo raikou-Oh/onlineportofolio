@@ -1,0 +1,49 @@
+<h2>Pencarian Berdasarkan resume</h2>
+<% form_for :search, @searchresume, :url => url_for(:action => :search),:method => 'get' do |f| -%>
+<%= hidden_field_tag :by, 'resume' -%>
+<div class="edit">
+	<div class='title'>informasi resume</div>
+	<div>
+		<div>domisili di kota: </div>
+		<div><%= f.text_field :kota %></div>
+	</div>
+	<div>
+		<div>umur: </div>
+		<div><%= f.text_field :umur_min, :value=> 0, :maxlength => 2 %> tahun - <%= f.text_field :umur_max, :value=> 0, :maxlength => 2 %> tahun</div>
+	</div>
+	<div>
+		<div>pengalaman minimal: </div>
+		<div><%= f.text_field :work_min, :value=> 0, :maxlength => 2 %> tahun</div>
+	</div>
+	<div>
+		<div>permintaan gaji: </div>
+		<div>Rp.<%= f.text_field :gaji_min,:value=> 0,:maxlength => 15 %> - Rp.<%= f.text_field :gaji_max,:value=> 0,:maxlength => 15 %></div>
+	</div>
+	<div>
+		<div>bidang pekerjaan: </div>
+		<div><%= f.text_field :bidang %></div>
+	</div>
+<%
+item = ""
+style = "display:inline-block;width:16%;"
+@tools.each do |t|
+	checkbox = check_box_tag "search[tool_ids][]",t.id
+	item += span_tag(checkbox+t.nama_tool,:style => style)
+end 
+%>
+<%= div_tag "Tool yang dikuasai",:class => "title" %>
+<%= div_tag item,:class => "item" %>
+
+<%
+item = ""	
+@languages.each do |t|
+	checkbox = check_box_tag "search[language_ids][]",t.id
+	item += span_tag(checkbox+t.language.to_s,:style => style)
+end 
+%>
+<%= div_tag "Bahasa yang dikuasai",:class => "title" %>	
+<%= div_tag item,:class => "item" %>
+	<div class="center"><%= f.submit "Cari User" %></div>
+</div>
+
+<% end %>

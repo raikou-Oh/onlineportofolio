@@ -1,0 +1,19 @@
+<% content_for :sidebar do %>
+	<%= render :partial => "sidebar" %>
+<% end %>
+
+<h1>New template</h1>
+
+<% form_for(@temp,:url => admin_temps_url,:html => {:multipart => true} ) do |f| %>
+  <%= f.error_messages %>
+  <p>
+  	<%= f.label :thumb_picture %>
+    <%= f.file_field :thumb_picture %>
+  </p>
+  <p>
+    <%= f.label :uploaded_file %><br />
+    <%= f.file_field :uploaded_file %>
+  </p>
+  <p><%= f.submit 'Create' %></p>
+<% end %>
+

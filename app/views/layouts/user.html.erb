@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title><%= @title %></title>
+		<%= stylesheet_link_tag "layout" , :media => "all" %>
+		<%= stylesheet_link_tag "user" , :media => "all" %>
+		<%= javascript_include_tag :defaults %>
+	</head>
+	<body>
+	<div id="wrapper">
+		<div id="logo"></div>
+		<div id="header">
+			<div id="menu"><!---->
+				<ul id="user_menu" class="rounded-corners">
+				<% if session[:uid] %>				
+				<li>| <%= link_to "home", root_path %></li>
+				<li>| <%= link_to "about", user_page_path %></li>
+				<li>| <%= link_to "project", :controller => "user/projects" %></li>
+				<li>| <%= link_to "resume",  :controller => "user/resumes" %></li>					
+				<li>| <%= link_to "pesan", :controller => "user/messages" %></li>				
+				<li>| <%= link_to "account",  :controller => "user/account" %></li>
+				<li>| <%= link_to "job",  :controller => "user/offers" %></li>
+				<li>| <%= link_to "log out", logout_path %> |</li>
+				<% end %>
+				</ul>
+				<div id="title">Selamat datang, <%= @user.resume.nama || @user.username%></div>
+				<% if @user.admin %>
+				<ul id="user_menu2" class="rounded-corners">
+				<li>| <%= link_to "user", :controller => "admin/users" %></li>
+				<li>| <%= link_to "bahasa", :controller => "admin/languages" %></li>
+				<li>| <%= link_to "tool",  :controller => "admin/tools" %></li>
+				<li>| <%= link_to "template", :controller => "admin/temps" %></li>
+				<li>| <%= link_to "laporan",  :controller => "admin/tools" %></li>				
+				</ul>
+				<% end %>
+			</div>
+		</div>
+		<div id="content_wrapper">
+			<div id="sidebar"><%= yield :sidebar %></div>
+			<div id="content">
+	<div class='_c'>
+		<% unless flash[:notice].nil? -%>
+		<div class="center"><%= flash[:notice] %> </div>
+		<% end -%>
+		<%= yield %>
+	</div>
+			</div>
+		</div>
+		<div id="footer">
+			Copyrights&copy;2010.All Rights Reserved.<%= link_to request.host_with_port,request.host_with_port %> 
+		</div>
+	</div>
+	</body>
+	<%= javascript_include_tag "jquery-1.4" %>
+	<%= javascript_include_tag "jquery_layout" %>
+</html>

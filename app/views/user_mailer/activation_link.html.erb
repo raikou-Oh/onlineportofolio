@@ -1,0 +1,18 @@
+<% 
+u = @user
+url = verified_user_url( :only_path => false ,:hash_key => @user.activationcode ) 
+%>
+
+Terima kasih anda telah mendaftar pada situs "http://www.onlineportfolio.co.cc"
+
+
+User login
+===========
+username: <%= u.username %>
+
+
+Anda harus mengaktifasi account untuk memulai penggunaan fasilitas.
+klik link berikut dibawah ini untuk melakukan aktifasi
+
+<%= url %>
+

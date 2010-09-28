@@ -1,0 +1,11 @@
+<div class="certification">
+<% 
+	status = certification.new_record? ? 'new' : 'existing' 
+ 	prefix = "resume[#{status}_certification][]" 
+%>
+<% fields_for prefix, certification do |cf| -%>
+	tahun <%= cf.text_field :tahun %>
+	dikeluarkan oleh: <%= cf.text_field :oleh %>
+	<%= button_to_function "remove" , "$(this).up('.certification').remove()" %>
+<% end -%>
+</div>

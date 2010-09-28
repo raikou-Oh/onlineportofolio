@@ -1,0 +1,19 @@
+
+<%= render(:partial => "user/resumes/resume") if @user.open_resume or session[:uid] %>
+<hr/>
+<h3>Kontak User</h3>
+<% form_for :message,:url => {:action => "sendmessage"} do |f| %>
+<%= f.error_messages %>
+<%
+	info = Array.new(4){Hash.new}
+	info[0][radio_button_tag('type','offer', true)+'tawaran pekerjaan'] = 
+		'email:'+text_field_tag(:email,'',:size => 25)
+	info[1][radio_button_tag('type','message')+"pesan antar user"] =" " if session[:uid]
+	info[2]['subjek'] = f.text_field :subjek, :size => 50
+	info[3]['pesan'] = f.text_area :pesan, :size => "50x10"
+%>	
+	<%= hidden_field_tag :id , params[:id] %>
+	<%= f.hidden_field :user_id , :value => params[:id] %>
+	<%= create_row_div info %>
+	<%= f.submit "send message" %>	
+<% end %>

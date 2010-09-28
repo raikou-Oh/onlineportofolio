@@ -1,0 +1,8 @@
+<p>dibuat tanggal: <%= @offer.created_at %></p>
+<p>subjek: <%= @offer.subjek %></p>
+
+<%= "email ke:" if @offer.out %><%= "email dari:" if not @offer.out %> <%= @offer.email %>
+
+<p>pesan:<br /></p>
+<p><%= @offer.pesan %></p>
+<%= render :file => "user_mailer/jobapplication",:resume => @user.resume %>

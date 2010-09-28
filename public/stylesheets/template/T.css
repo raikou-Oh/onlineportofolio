@@ -1,0 +1,17 @@
+.menu {display:inline-block;width:200px;}
+.menu a{
+	margin:10px;
+	height:30px;
+	display:block;
+}
+#header a,#footer a{
+	color:white;
+}
+#header,#footer{
+	color:white;
+	background:#004040;
+}
+a:hover{text-decoration:underline;}
+a{text-decoration:none;}
+.title{color:white;
+background-color:#008000;}

@@ -1,0 +1,3 @@
+<% for p in @projects do %>
+<div><%= link_to p.judul,:action => :showproject,:id => params[:id],:projectid => p.id %></div>
+<% end %>

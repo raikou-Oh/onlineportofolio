@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  tool_id: 1
+  nama_tool: MyString
+  fungsi: MyString
+  versi: MyString
+
+two:
+  tool_id: 1
+  nama_tool: MyString
+  fungsi: MyString
+  versi: MyString

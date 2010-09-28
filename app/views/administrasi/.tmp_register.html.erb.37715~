@@ -1,0 +1,74 @@
+<% @title = "Mendaftar user baru" %>
+<% form_for(@user, :url => {:controller => "administrasi"},:method=> :post ) do |f| %>
+  <%= f.error_messages %>
+  <% if @templates.any? %>
+  <div id="templates">
+  	<div id="backBtn"><%= link_to image_tag("back.png") %></div>
+	<div id="nextBtn"><%= link_to image_tag("next.png") %></div>
+	<div id="temps">
+  	<% @templates.each do |temp| %>
+	<div class="container">
+		<div>
+		<%= f.radio_button :template_id ,temp.id %>
+		</div>
+		<div><%= temp.picture_link %></div>
+	</div>
+	<% end %>
+	</div>	
+  </div>
+  <% end %>
+  <div class="edit">	  	  	
+	  <div>
+	  	<div><%= f.label :username %></div>
+		<div><%= f.text_field :username %></div>
+	  </div>
+	  <div>
+	  	<div><%= f.label :password %></div>
+		<div><%= f.password_field :password %></div>
+	  </div>
+	  <div>
+	  	<div>konfirmasi password :</div>
+		<div><%= f.password_field :password_confirmation %></div>
+	  </div>
+	  <div>
+	  	<div><%= f.label :email %></div>
+		<div><%= f.text_field :email %></div>
+	  </div>
+	  <div>
+	  	<div><%= f.label :open_resume,"batasan resume" %></div>
+		<div>
+			<%= f.radio_button :open_resume, true %>terbuka untuk umum
+			<%= f.radio_button :open_resume, false,:checked => "checked" %>hanya member
+		</div>
+		<div class="info">
+jika anda memilih "hanya member", resume yang anda masukkan hanya dapat dilihat oleh member.<br>
+"terbuka untuk umum berarti semua pengunjung situs dapat melihat resume anda.  
+		</div>
+	  </div>
+	  <div>
+	  	<div><%= f.label :message,"batasan pengiriman pesan" %></div>
+		<div>
+	   		<%= f.radio_button :message, true %>terbuka untuk umum
+			<%= f.radio_button :message, false,:checked => "checked" %>hanya member	
+		</div>
+		<div class="info">
+pilihan diatas mengatur batasan member atau sekedar pengunjung situs untuk mengirimkan pesan kepada anda.  
+		</div>
+	  </div>
+	  <div>
+	  	<div><%= f.label :info_exp,"keterbukaan informasi personal" %></div>
+		<div>	
+			<%= f.radio_button :info_exp, true %>tampil
+			<%= f.radio_button :info_exp, false,:checked => "checked" %>tidak tampil		
+		</div>
+		<div class="info">
+jika pilihan nomor 1 diisi terbuka untuk umum, <br>
+menu ini akan menentukan tampil atau tidaknya data personal( email, nomor telepon) anda   
+		</div>
+	  </div>
+	  <div>
+		<%= f.submit 'Create' %>
+	  </div>
+  </div>
+<% end %>
+

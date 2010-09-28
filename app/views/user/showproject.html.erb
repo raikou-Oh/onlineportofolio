@@ -1,0 +1,42 @@
+
+<% if p = @project %>
+	<% @title = "#{p.judul} oleh #{p.user.username}" %>
+<% info = Array.new(6){Hash.new}
+info[0]['judul']= p.judul
+info[1]['untuk perusahaan'] = p.perusahaan
+info[2]['url'] = p.url.empty? ? "" : link_to(p.url, "http://#{p.url}")
+info[3]['lama pengerjaan'] = p.lama_pengerjaan
+info[4]['deskripsi pekerjaan'] = p.job_desc
+info[5]['deskripsi project'] = p.deskripsi
+%>
+<%= div_tag "informasi project",:class => "title" %>
+<%= div_tag create_row_div(info),:class => "item" %>
+
+
+<%= div_tag "daftar file",:class => "title" %>
+<% p.parts.each do |part| %>
+	<%= div_tag link_to(part.judul, :action => "showfile", :id => params[:id], :fileid => part ) %>
+<% end %>
+
+
+<%= div_tag "review project", :class => "title" %>
+<%
+if not session[:uid]
+	pesan = "Harap #{link_to("login",login_path)} sebelum memberi review"
+elsif p.is_owner(session[:uid]) 
+	pesan = "anda tidak dapat memberikan review pada project anda"
+elsif p.is_reviewed_user(session[:uid]) 
+	pesan = "anda sudah pernah memberikan review pada project ini"
+else 
+	form_for :review, @review,  :url => {:action => "reviewproject"} do |f| 
+%>
+		<%= f.hidden_field :project_id,:value => p.id %>
+		<%= render :partial => 'review_form',:locals => {:f => f,:oid => params[:id]} %>
+	<% end %>
+<% end %>
+<%= div_tag(pesan, :class => "item") if pesan %>
+
+	<% p.reviews.each do |re| %>
+		<%= render :partial => 'review', :object => re %>
+	<% end %>	
+<% end %>

@@ -1,0 +1,40 @@
+<p>
+Terima Kasih anda telah mendaftar dalam onlineportofolio.co.cc
+</p>
+<p>
+Untuk memulai menggunakan fasilitas pada situs, masuk ke menu resume terlebih dahulu<br />
+kemudian mengisi resume anda.resume terdiri dari data diri, 
+</p>
+<p>
+
+<dl><b>::Menu yang terdapat pada header adalah sebagai berikut:</b>
+	<dt>Home</dt>
+	<dd>Menu untuk kembali ke halaman utama</dd>
+	<dt>Project</dt>
+	<dd>Pada menu ini user dapat mendokumentasikan project yang telah dikerjakan</dd>
+	<dt>Resume</dt>
+	<dd>Melihat dan mengisi resume</dd>
+	<dt>Pesan</dt>
+	<dd>
+		Menu ini untuk melihat pesan yang masuk dan keluar. 
+		Menu ini khusus untuk melihat pesan yang datang dan keluar dari sesama member
+	</dd>
+	<dt>Job</dt>
+	<dd>
+		Menu job untuk melihat pesan yang masuk dari user luar. pesan dapat berisi tawaran pekerjaan yang dikirimkan untuk anda. 
+		Pada menu job anda dapat mengirim lamaran pekerjaan yang ditujukan melalui email, secara otomatis resume akan disertakan saat anda mengirimkan pesan.
+	</dd>
+</dl>
+
+<% if @user.admin -%>
+<dl><b>::Menu khusus untuk admin adalah sebagai berikut:</b>
+	<dt>User</dt>
+	<dd>Menu untuk melihat daftar user yang ada.</dd>
+	<dt>Tools</dt>
+	<dd>Pada menu ini admin dapat menambahkan nama tool yang terdapat pada situs ini.</dd>
+	<dt>Languages</dt>
+	<dd>Pada menu ini admin dapat menambahkan bahasa(baik pemrograman maupun bahasa sehari).</dd>
+	<dt>Laporan</dt>
+	<dd>Menu ini digunakan untuk melihat laporan penggunaan situs yang dilakukan oleh user</dd>	
+</dl>
+<% end -%>

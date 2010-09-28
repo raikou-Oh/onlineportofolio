@@ -1,0 +1,36 @@
+<% content_for :sidebar do %>
+	<%= render :partial => "sidebar" %>
+<% end %>
+
+<% form_tag url_for(:action => "many_selected") do %>	
+	<table class="list">
+		<thead>
+		  <tr>
+			<th colspan=4 align=left>
+				<%= submit_tag "hapus pesan",:name => "remove" %>
+			</th>
+		  </tr>
+		  <tr>
+		  	<th width="1%"><%= check_box_tag "all" %></th>
+		    <th width="20%">Kepada</th>
+		    <th width="60%">Subjek</th>
+			<th width="10%">tujuan</th>
+		    <th width="10%">Tanggal</th>	
+		  </tr>
+		</thead>
+		<tbody>
+		<% @offers.each do |offer| %>
+		  <tr>
+		  	<td><%= check_box_tag "message_ids[]", offer.id %></td>
+		    <td><%=h offer.email %></td>
+			<td><%= link_to offer.subjek , user_offer_path(offer) %></td>
+			<td><%= if offer.out then "keluar" else "masuk" end %></td>		    
+			<td><%=h offer.created_at.to_s(:short) %></td>
+		  </tr>
+		<% end %> 
+		<% if @offers.count<=0 %>
+		 	<tr><td colspan="5" align="center" height="200px">tidak ada pesan</td></tr> 
+		<% end %>
+		</tbody>
+	</table>
+<% end %>

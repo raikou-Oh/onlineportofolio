@@ -1,0 +1,34 @@
+<div id="file_list">
+
+<table class="list">	
+<thead>
+  <tr>
+	<th colspan=4 align=left>
+		<%= submit_tag "hapus files",:name => "remove" %>
+	</th>
+  </tr>
+  <tr>
+  	<th width="1%"></th>
+    <th width="60%">Judul</th>
+    <th width="5%">Rating</th>
+    <th>Tipe File</th>
+  </tr>
+</thead>
+<tbody>
+	<% parts.each do |f| %>
+	  <tr>
+	  	<td><%= check_box_tag "file_ids[]", f.id %></td>
+	    <td><%= link_to f.judul, 
+				:controller => "user/pfiles", :id => f.id, :action => "show" %></td>
+	    <td><%=h f.rating %></td> 
+	    <td><%=h f.filetype %></td>
+		<td><%=h %>edit</td>		    
+	  </tr>
+	<% end %>
+	<% if parts.count<=0 %>
+	 	<tr><td colspan="5" align="center" height="150px">blom ada files</td></tr> 
+	<% end %>
+</tbody>
+</table>
+
+</div>

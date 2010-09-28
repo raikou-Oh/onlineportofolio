@@ -1,0 +1,19 @@
+<div class="button"><%= button_to 'Buat pesan baru', new_user_message_path %></div>
+				<div id="kotak_pesan">
+					<div><%= link_to 'Inbox', user_messages_path(:tipe => 'inbox') %></div>
+					<div><%= link_to 'Outbox', user_messages_path(:tipe => 'outbox')%></div>
+					<div><%= link_to 'Penting', user_messages_path(:tipe => 'penting') %></div>
+				</div>
+								
+				<% if @msggroups.any? %>
+				<div id="group">
+					<div class="title">
+					<%= link_to "Daftar Grup", :action => "new_group", :html => {:alt=>"klik untuk buat grup baru"} %>	
+					</div>			
+					<% @msggroups.each do |mg| %>
+						<div>
+							<%= link_to mg.nama, {:action => "show_message_by_group",:id => mg.id} %>
+						</div>
+					<% end %>
+				</div>
+				<% end %>

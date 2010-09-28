@@ -1,0 +1,25 @@
+<h1>Listing users</h1>
+
+<table class="list">
+<thead>
+  <tr>  	
+    <th>Template</th>
+    <th>Username</th>
+    <th>Email</th>    
+    <th>project total</th>
+	<th>Active</th>	
+  </tr>
+</thead>
+<% @users.each do |user| %>
+  <tr>
+    <td><%=h user.template.nama %></td>
+    <td><%= link_to user.username,admin_user_path(user) %></td>
+    <td><%=h user.email %></td>
+    <td><%=h user.activated %></td>
+	<td><%=h user.projects.count %></td>
+    <td><%= link_to 'Destroy', admin_user_path(user), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />

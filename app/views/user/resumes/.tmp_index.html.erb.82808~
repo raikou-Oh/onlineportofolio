@@ -1,0 +1,63 @@
+	<% content_for :sidebar do || %>
+		<%= render :partial=> "sidebar" %>      
+    <% end %>
+	
+<% if resume = @resume %>
+	nama <%= resume.nama %>	<br>
+	alamat <%= resume.alamat %><br>
+	kota <%= resume.kota %><br>
+	kode pos <%= resume.kode_pos %><br>
+	telepon <%= resume.telepon %><br>
+	bidang <%= resume.bidang %><br>
+	marital <%= resume.marital %><br>
+	jenis kelamin <%= resume.jenis_kelamin=="M"? "laki-laki" : "perempuan" %><br />
+	
+	bahasa yang dikuasai: 
+	<% resume.languages.each do |lang| %>		
+		<%= lang.language %>
+		<%= lang.tipe %>
+		<br>
+	<% end %>
+	<br>
+	
+	tool yang dikuasai: 
+	<% resume.tools.each do |tool| %>		
+		<%= tool.nama_tool %>		
+		<br>
+	<% end %>
+	<br>
+	
+	sejarah pekerjaan: 
+	<% resume.work_histories.each do |work| %>		
+		<%= work.awal %> - <%= work.akhir %> : 
+		<%= work.perusahaan %>
+		<%= work.posisi %>
+		<%= work.bidang %>  
+		<br>
+	<% end %>
+	<br>
+	
+	sejarah pendidikan: 
+	<% resume.education_histories.each do |edu| %>
+		<%= edu.nama_sekolah %> <%= edu.awal %> - <%= edu.akhir %> : <%= edu.nilai %>
+		<br>
+	<% end %>
+	<br>
+	
+	sertifikasi yang diperoleh: 
+	<% resume.certifications.each do |cf| %>
+		<%= cf.judul %><%= cf.oleh %><%= cf.tahun %>
+	<% end %><br>
+	
+	informasi lain: 
+	<% resume.generals.each do |gen| %>
+		<%= gen.awal %>
+		<%= gen.akhir %>
+		<%= gen.judul %>
+		<%= gen.deskripsi %>
+	<% end %><br>
+
+  	<%= link_to 'Edit', edit_user_resume_path(@resume) %> |
+	<%= link_to 'Back', user_resumes_path %>
+<% end %>
+<br />

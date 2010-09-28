@@ -1,0 +1,17 @@
+	<div class="edit">
+		<div>
+			<div>Dikirimkan ke: </div>
+			<div><%=h @message.user.username %></div>
+		</div>	
+		<div>
+			<div>Tanggal: </div>
+			<div><%=h @message.created_at.to_date.to_s(:long) %></div>
+		</div>
+		<div>
+			<div>Subjek: </div>
+			<div><%=h @message.subjek %></div>
+		</div>
+		<div>
+			<%=h @message.pesan %>
+		</div>	
+	</div>

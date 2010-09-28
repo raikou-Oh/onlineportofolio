@@ -1,0 +1,36 @@
+<div id="file_list">
+<% form_tag url_for(:action => "many_selected",:controller => "pfiles") do %>
+<table class="list">	
+<thead>
+  <tr>
+	<th colspan=4 align=left>
+		<%= submit_tag "hapus files",:name => "remove" %>
+	</th>
+  </tr>
+  <tr>
+  	<th width="1%"></th>
+    <th width="60%">Judul</th>
+    <th width="5%">Rating</th>
+    <th width="15%">Deskripsi</th>
+    <th>Tipe File</th>    
+  </tr>
+</thead>
+<tbody>
+	<% parts.each do |file| %>
+	  <tr>
+	  	<td><%= check_box_tag "file_ids[]", file.id %></td>
+	    <td><%= link_to file.judul  %></td>
+	    <td><%=h file.rating %></td>
+	    <td><%=h file.deskripsi %></td>	    
+	    <td><%=h file.filetype %></td>	    
+	  </tr>
+	<% end %>
+	<% if parts.count<=0 %>
+	 	<tr><td colspan="5" align="center" height="150px">blom ada files</td></tr> 
+	<% end %>
+</tbody>
+</table>
+
+<% end %>
+
+</div>

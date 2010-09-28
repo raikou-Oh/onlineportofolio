@@ -1,0 +1,23 @@
+<% @title = 'Pencarian Lanjut' %>
+<% form_tag url_for(:action => :search) do %>
+<div class="edit">
+	<%= hidden_field_tag "type","simple" %>
+	<div>
+		<div>umur maksimal: </div>
+		<div><%= text_field_tag :tahun %> tahun</div>
+	</div>
+	<div>
+		<div>lulusan: </div>
+		<div>tahun</div>
+	</div>
+	<div>
+		<div>pengalaman bekerja: </div>
+		<div><%= text_field_tag :tahun %></div>
+	</div>
+	<div>
+		<div>bidang pekerjaan: </div>
+		<div><%= text_field_tag :bidang %></div>
+	</div>
+	<div class="center"><%= submit_tag "Cari User" %></div>	
+</div>
+<% end %>

@@ -1,0 +1,28 @@
+<h1>Listing templates</h1>
+
+<table>
+  <tr>
+    <th>Template</th>
+    <th>Nama</th>
+    <th>Tanggal</th>
+    <th>Lokasi file</th>
+    <th>Thumb</th>
+  </tr>
+
+<% @templates.each do |template| %>
+  <tr>
+    <td><%=h template.template_id %></td>
+    <td><%=h template.nama %></td>
+    <td><%=h template.tanggal %></td>
+    <td><%=h template.lokasi_file %></td>
+    <td><%=h template.thumb %></td>
+    <td><%= link_to 'Show', template %></td>
+    <td><%= link_to 'Edit', edit_template_path(template) %></td>
+    <td><%= link_to 'Destroy', template, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New template', new_template_path %>

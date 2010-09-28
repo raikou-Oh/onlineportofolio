@@ -1,0 +1,17 @@
+<% 
+unless @results.nil?
+	@results.each do |r|
+		user = r.user
+		isi = Array.new
+		isi.push( div_tag user.username, :class=> "name" ) 
+		isi.push( div_tag user.email, :class=> "info" )
+		isi.push( div_tag "Jumlah project: "+user.projects.count.to_s, :class=> "info" )
+		isi = div_tag isi , :class => "user"
+-%>
+<%= link_to isi,{:controller => "user", :action => "projectlist", :id => user.id },:target => '_blank' %>
+<% 
+	end
+else
+	data tidak ditemukNa	
+end
+-%>

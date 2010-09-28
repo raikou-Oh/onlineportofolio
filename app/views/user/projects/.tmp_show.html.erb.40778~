@@ -1,0 +1,53 @@
+	<% content_for :sidebar do || %>
+		<%= render :partial=> "sidebar" %>
+		<div><%= link_to 'ubah detail project', edit_user_project_path(@project) %></div>
+		<div><%= link_to 'tambahkan file baru', new_user_pfile_path(:projectid => @project.id) %></div>			
+    <% end %>
+
+	<table class="info">
+		<thead>
+			<tr>
+				<th colspan=2><%= @project.judul %></th>
+			</tr>
+			<tr>
+				<th colspan=2><%= @project.project_file %></th>
+			</tr>		
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td width="20%">nama perusahaan :</td>
+			<td><%= @project.perusahaan %></td>
+		</tr>
+		<tr>
+			<td>Rating :</td>
+			<td><%= @project.reviews.average(:rating) %></td>
+		</tr>
+		<tr>
+			<td>lama pengerjaan :</td>
+			<td><%= @project.lama_pengerjaan %></td>
+		</tr>
+		<% if @project.url %>
+		<tr>
+			<td>link menuju project :</td>
+			<td><%= @project.url %></td>
+		</tr>
+		<% end %>
+		<tr>
+			<td>pekerjaan :</td>
+			<td><%= @project.job_desc %></td>
+		</tr>
+		<tr>
+			<td>tentang project :</td>
+			<td><%= @project.deskripsi %></td>
+		</tr>
+		<tr>
+			<td>jum files:</td>
+			<td><%= @project.parts.count %></td>
+		</tr>
+		</tbody>
+	</table>
+	<% form_tag url_for(:action => "many_selected",:controller => "pfiles") do %>      	
+  		<%= hidden_field_tag :projectid, @project.id  %>
+		<%= render :partial => "parts", :object => @project.parts %>
+	<% end %>

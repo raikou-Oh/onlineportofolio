@@ -1,0 +1,127 @@
+<style>
+	table.resume{
+		border:1px solid #808080;
+		margin:0 auto;
+		width:740px;
+	}
+	td.title{background:#c0c0c0;}
+	td table{padding:10px;}
+	.resume > tr {border-bottom:1px #ddd solid;}
+</style>
+
+<table class="resume">
+<% if resume %>
+<%
+item = Array.new(8){Hash.new}
+item[0]["nama:"]= resume.nama
+item[1]["tanggal lahir:"]= resume.tanggal_lahir.strftime('%d %B %Y')
+item[2]["alamat:"]= resume.alamat
+item[3]["kota:"]= resume.kota
+item[4]["kode pos:"]= resume.kode_pos
+item[5]["telepon:"]= number_to_phone(resume.telepon)
+item[6]["jenis kelamin:"]= resume.gender
+item[7]["status:"]= resume.marital_status
+%>
+<%= tr_tag td_tag("Data Diri", :class => "title",:colspan => "2") %>
+<%= create_table_row item %>
+
+<%
+item = Array.new(3){Hash.new}
+item[0]["bidang:"] = resume.bidang
+item[1]["Pengalaman:"] = resume.pengalaman.to_s+' Tahun'
+item[2]["permintaan gaji:"] = 'Rp.' + (number_with_delimiter(resume.gaji,'.') || 0).to_s 
+%>
+<%= tr_tag td_tag("Pekerjaan", :class => "title",:colspan => "2") %>
+<%= create_table_row item %>
+			
+<% unless resume.education_histories.blank? %>
+	<%
+	rows = ""
+	resume.education_histories.each do |edu|
+		item = Array.new(3){Hash.new}
+		item[0]["tahun ajaran:"] = "#{edu.awal} - #{edu.akhir}"
+		item[1]["sekolah:"] = "#{edu.grade}.#{edu.nama_sekolah}"
+		item[2]["nilai:"] = edu.nilai
+		rows += create_table_row(item).to_s
+	end
+	%>
+	<%= tr_tag td_tag("Riwayat Pendidikan", :class => "title",:colspan => "2") %>
+	<%= td_tag("<table>"+rows+"</table>", :colspan => "2") %>
+<% end %>
+
+
+<% unless resume.work_histories.blank? %>
+	<%
+	rows = ""
+	resume.work_histories.each do |work|
+		item = Array.new(4){Hash.new}
+		item[0]["tahun:"] = "#{work.awal.strftime('%b %Y')} - #{work.akhir.strftime('%b %Y')}"
+		item[1]["perusahaan:"] = work.perusahaan
+		item[2]["posisi:"] = work.posisi
+		item[3]["bidang:"] = work.bidang
+		rows += create_table_row(item).to_s
+	end
+	%>
+	<%= tr_tag td_tag("Riwayat Pekerjaan", :class => "title",:colspan => "2") %>
+	<%= td_tag("<table>"+rows+"</table>", :colspan => "2") %>
+<% end %>
+
+<% unless resume.languages.blank? and resume.tools.blank? %>
+	<% j = td = "" %>
+	<% unless resume.languages.blank? %>
+		<%
+		rows = ""
+		resume.languages.each do |lang|
+			rows += tr_tag td_tag(lang.language)
+		end
+		j = td_tag "bahasa",:class=>"title",:width=> "50%"
+		td = td_tag "<table>"+rows.to_s+"</table>" 
+		%>
+	<% end %>
+	<% unless resume.tools.blank? %>
+		<%
+		rows = ""
+		resume.tools.each do |tool|
+			rows += tr_tag td_tag(tool.nama_tool)
+		end
+		j += td_tag "tool",:class=>"title"
+		td += td_tag "<table>"+rows.to_s+"</table>"
+		%>
+	<% end %>
+	<%= tr_tag(td_tag("Kemampuan", :class => "title",:colspan => "2")) %>
+	<%= tr_tag(td_tag("<table>"+tr_tag(j)+tr_tag(td)+"</table>",:colspan => "2")) %>	
+	
+<% end %>
+
+<% unless resume.certifications.blank? %>
+	<%
+	rows = ""
+	resume.certifications.each do |cf|
+		item = Array.new(3){Hash.new}
+		item[0]["dikeluarkan:"] = cf.oleh
+		item[1]["judul:"] = cf.judul
+		item[2]["tahun:"] = cf.tahun
+		rows += create_table_row(item).to_s
+	end
+	%>
+	<%= tr_tag td_tag("Sertifikasi", :class => "title",:colspan => "2") %>
+	<%= td_tag("<table>"+rows+"</table>", :colspan => "2") %>
+<% end %>
+
+<% unless resume.generals.blank? %>
+	<%
+	rows = ""
+	resume.generals.each do |gen|
+		item = Array.new(3){Hash.new}
+		item[0]["tahun:"] = gen.tahun
+		item[2][gen.judul] = gen.deskripsi
+		rows += create_table_row(item).to_s
+	end
+	%>
+	<%= tr_tag td_tag("informasi lain", :class => "title",:colspan => "2") %>
+	<%= td_tag("<table>"+rows+"</table>", :colspan => "2") %>
+<% end %>
+
+<% end %>
+
+</table>

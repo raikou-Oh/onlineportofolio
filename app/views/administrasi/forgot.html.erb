@@ -1,0 +1,11 @@
+<% form_tag url_for(:action => "forgot", :controller => "administrasi" ) do %>
+<div>
+	<div>
+		<div>email or username: </div>
+		<div><%= text_field_tag :name, params[:name] %></div>
+	</div>	
+	<div>
+		<div><%= submit_tag "submit" %></div>	
+	</div>	
+</div>
+<% end %>

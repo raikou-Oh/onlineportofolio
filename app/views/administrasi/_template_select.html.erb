@@ -1,0 +1,14 @@
+<div class="info">Pilih template yang anda inginkan.template ini menentukan tampilan portofolio yang akan dilihat </div>
+  <div id="templates">
+  	<div id="backBtn"><%= link_to image_tag("back.png") %></div>
+	<div id="nextBtn"><%= link_to image_tag("next.png") %></div>
+	<div id="temps">
+  	<% @templates.each do |temp| -%>
+	<div class="container">
+		<div>
+		<%= f.radio_button :template_id ,temp.id %>
+		</div>
+		<div><%= image_tag(temp.picture_link,:size => "200x150") %></div>
+	</div>
+	<% end -%>
+	</div>	

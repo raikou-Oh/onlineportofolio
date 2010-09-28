@@ -1,0 +1,19 @@
+<% content_for :sidebar do || %>
+	<%= render :partial=> "user/projects/sidebar" %>
+	<div><%= link_to "kembali ke project", {:controller => "user/projects", :action => "show", :id => @pfile.project.id}%></div>
+<% end %>
+
+
+<%= @pfile.judul %><br/>
+<%= @pfile.deskripsi %>
+
+	<% if @pfile.reviews.any? -%>
+	<% @pfile.reviews.each do |re| -%>
+		<% info = Array.new(3){Hash.new}
+			info[0]['user']= re.user.username
+			info[1]['rating'] = re.rating
+			info[2]['review'] = re.review
+		%>
+		<%= div_tag create_row_div(info),:class=>"item" %> 
+	<% end %>
+	<% end -%>

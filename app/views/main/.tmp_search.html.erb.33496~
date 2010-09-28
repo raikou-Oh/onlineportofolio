@@ -1,0 +1,18 @@
+<% @title = 'Pencarian Lanjut' %>
+<% form_for @search, :url => url_for(:action => :search) do |f| -%>
+<div class="item">
+	<div>
+		<div>umur: </div>
+		<div><%= f.text_field :umur_min, :maxlength => 2 %> tahun - <%= f.text_field :umur_max, :maxlength => 2 %> tahun</div>
+	</div>
+	<div>
+		<div>pengalaman minimal: </div>
+		<div><%= f.text_field :work_min, :maxlength => 2 %> tahun</div>
+	</div>
+	<div>
+		<div>bidang pekerjaan: </div>
+		<div><%= f.text_field :bidang %></div>
+	</div>
+	<div class="center"><%= f.submit "Cari User" %></div>	
+</div>
+<% end %>

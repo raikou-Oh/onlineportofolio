@@ -1,0 +1,4 @@
+<% content_for :sidebar do || %>
+	<%= render :partial=> "user/projects/sidebar" %>
+	<% link_to "project", {:controller => "user/projects", :action => "show", :id => @pfile.project.id}%> 	    
+<% end %>

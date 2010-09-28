@@ -1,0 +1,54 @@
+	<% content_for :sidebar do || %>
+		<%= render :partial=> "sidebar" %>
+    <% end %>
+
+<h1>New project</h1>
+
+<% form_for (@project, :url => user_projects_path, :html => {:multipart => true}) do |f| %>
+  <%= f.error_messages %>
+  <div class="edit">
+  	<div>
+  		<div><%= f.label :judul %></div>
+		<div><%= f.text_area :judul, :size => "60x3" %></div>
+  	</div>
+	<div>
+		<div><%= f.label :project_file %></div>
+		<div><%= f.file_field :project_file %></div>
+	</div>
+	<div>
+		<div><%= f.label :perusahaan %></div>
+		<div><%= f.text_field :perusahaan %></div>
+	</div>
+	<div>
+		<div><%= f.label :lama_pengerjaan %></div>
+		<div><%= f.text_field :lama_pengerjaan, :size => "4" %> Bulan</div>
+	</div>
+	<div>
+		<div><%= f.label :url %></div>
+		<div>http://<%= f.text_field :url, :size => 80 %></div>
+	</div>
+	<div>
+		<div><%= f.label :job_desc %></div>
+		<div><%= f.text_field :job_desc, :size => "30" %></div>
+	</div>	
+	<div>
+		<div><%= f.label :deskripsi %></div>
+		<div><%= f.text_area :deskripsi,:size => "50x10" %></div>
+	</div>
+	
+	<%  
+item = ""
+ts = Tool.all 
+ts.each do |t|
+	checkbox = check_box_tag("project[tool_list][#{t.id}]","1")
+	item += span_tag(checkbox+t.nama_tool.to_s,:style => "display:block;")
+end 
+%>
+<%= div_tag "Tool yang dipergunakan",:class => "title" %>
+<%= div_tag item %>
+
+	<div>
+		<%= f.submit 'Create' %>
+	</div>
+  </div>  
+<% end %>

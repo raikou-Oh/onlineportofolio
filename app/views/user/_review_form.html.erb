@@ -1,0 +1,5 @@
+		<%= f.hidden_field :user_id,:value => session[:uid] %>
+		<%= hidden_field_tag :owner, oid %>
+		<div>rating : <%= f.text_field :rating,:maxlength => 1 %>(angka antara 0-9)</div>
+		<div>review : <%= f.text_area :review, :size => "50x7" %></div>
+		<div><%= f.submit "beri review" %></div>

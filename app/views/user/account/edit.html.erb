@@ -1,0 +1,45 @@
+	<% content_for :sidebar do || %>
+		<%= render :partial=> "sidebar" %>      
+    <% end %>
+
+<h1>set account</h1>
+<% form_for(@user, :url => user_account_path) do |f| %>
+  <%= f.error_messages %>
+<% @templates.each do |temp| %>
+	<div class="container">
+		<div>
+		<%= f.radio_button :template_id ,temp.id %>
+		</div>
+		<div>
+<%=	image_tag(temp.picture_link,:size => "200x150") %>
+		</div>
+	</div>
+	<% end %>
+	
+  <p>
+    <%= f.label :username %><br />
+    <%= @logon_uname %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+  	<%= f.label :open_resume %></td>	
+	<%= f.radio_button :open_resume, true %>terbuka untuk umum
+	<%= f.radio_button :open_resume, false %>hanya member				
+  </p>
+  <p>
+  	<%= f.label :message %></td>	
+	<%= f.radio_button :message, true %>terbuka untuk umum
+	<%= f.radio_button :message, false %>hanya member				
+  </p>
+    <p>
+  	<%= f.label :info_exp %></td>	
+	<%= f.radio_button :info_exp, true %>terbuka untuk umum
+	<%= f.radio_button :info_exp, false %>hanya member				
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

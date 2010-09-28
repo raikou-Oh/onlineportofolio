@@ -1,0 +1,42 @@
+	<% content_for :sidebar do || %>
+		<%= render :partial=> "sidebar" %>      
+    <% end %>
+
+<h1>New project</h1>
+
+<% form_for (@project, :url => user_projects_path, :html => {:multipart => true}) do |f| %>
+  <%= f.error_messages %>
+  <div class="edit">
+  	<div>
+  		<div><%= f.label :judul %></div>
+		<div><%= f.text_field :judul %></div>
+  	</div>
+	<div>
+		<div><%= f.label :perusahaan %></div>
+		<div><%= f.text_field :perusahaan %></div>
+	</div>
+	<div>
+		<div><%= f.label :lama_pengerjaan %></div>
+		<div><%= f.text_field :lama_pengerjaan %></div>
+	</div>
+	<div>
+		<div><%= f.label :url %></div>
+		<div><%= f.text_field :url %></div>
+	</div>
+	<div>
+		<div><%= f.label :job_desc %></div>
+		<div><%= f.text_area :job_desc %></div>
+	</div>
+	<div>
+		<div><%= f.label :project_file %></div>
+		<div><%= f.file_field :project_file %></div>
+	</div>
+	<div>
+		<div><%= f.label :deskripsi %></div>
+		<div><%= f.text_field :deskripsi %></div>
+	</div>
+	<div>
+		<%= f.submit 'Create' %>
+	</div>
+  </div>  
+<% end %>

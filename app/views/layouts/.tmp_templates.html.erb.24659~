@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title><%= (@title || "").titleize %></title>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />  
+  <%= stylesheet_link_tag 'user/default' %>  
+  <%= style_tag @user.template.data %>
+</head>
+<body>
+<div id="header">	
+	<%= div_tag link_to("Daftar Project", {:action => "projectlist",:id => params[:id]} ),:class=> "menu" %>
+	<%= div_tag link_to("Tentang User", {:action => "aboutuser",:id => params[:id]} ),:class=> "menu" %>	
+	<%= div_tag(link_to("Edit", user_page_path ),:class=> "menu") if params[:id].to_i==session[:uid].to_i %>	
+</div>
+<div id="wrapper">
+	<div id="content">		
+		<%= div_tag(flash[:notice], :class => "notice") if flash[:notice] %>
+		<div><%= yield %></div>
+	</div>	
+</div>
+<div id="footer">aaaa</div>
+</body>
+</html>

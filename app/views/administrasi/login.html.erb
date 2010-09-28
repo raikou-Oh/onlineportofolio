@@ -1,0 +1,18 @@
+
+<% form_tag(:action=> "login", :controller => "administrasi") do -%>
+<div class="edit" style='width:500px;'>
+	<div>
+		<div><label for="uname">username: </label></div>
+		<div><%= text_field_tag :uname, params[:username], :size => "25" %></div>
+	</div>
+	<div>
+		<div><label for="pass">kata sandi: </label></div>
+		<div><%= password_field_tag :pass, params[:password], :size => "25" %></div>
+	</div>
+	<div><center><%= submit_tag 'Login' %></center></div>
+	<div>klik <%= link_to "disini", register_path %> untuk mendaftar</div>
+	<div><%= link_to "lupa password", forgot_pass_path %></div>
+</div>
+<% end -%>
+
+

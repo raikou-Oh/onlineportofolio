@@ -1,0 +1,43 @@
+<% if file = @file %>
+	<% @title = "file: #{file.judul} dari user #{file.owner}" %>
+		
+
+<% info = Array.new(3){Hash.new}
+info[0]['judul']= file.judul
+info[1]['tipe file'] = file.filetype
+info[2]['deskripsi file'] = file.deskripsi
+%>
+
+<%= div_tag "informasi project",:class => "title" %>
+<%= create_row_div info %>	
+
+
+<%= div_tag "review file", :class => "title" %>	
+<% 
+if file.is_owner(session[:uid]) 
+	pesan = "anda tidak dapat memberikan review pada project anda" 
+elsif file.is_reviewed_user(session[:uid])
+	pesan = "anda sudah pernah memberikan review pada project ini"			
+elsif session[:uid]	
+	 form_for :review, @review, :url => {:action => "reviewfile"} do |f| %>
+		<%= f.hidden_field :file_id,:value => file.id %>
+		<%= render :partial => 'review_form',:locals => {:f => f,:oid => params[:id]} %>
+	<% end
+else 
+	pesan = "Harap #{link_to("login",login_path)} sebelum memberi review"
+end %>	
+<%= div_tag(pesan,:class => "item") if pesan %>	
+
+<% file.reviews.each do |re| %>
+	<%= render :partial => 'review', :object => re %>
+<% end %>
+	
+	
+<% end %>
+
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+<h1>User::Testing#index</h1>
+	<fieldset><legend>Tools yang dikuasai </legend>
+	<div id="tools">
+		<%= f.collection_select :tools, @resume, Tool.find(:all), :tool_id, :nama_tool %>
+ 		<%= add_link "tambah",:tools, "tool", Tool.find(1) %>
+		<%= render :partial => "tool", :collection => @resume.tools %> 		
+ 	</div>
+	</fieldset>
+	
+	<th width="10%">Grup</th><td><%= message.message_group.nama if not message.message_group.nil? %></td> 
+	
+		<fieldset>
+  	<legend>Bahasa yang dikuasai</legend>
+	<div id="languages">
+		<%= f.collection_select :languages, Language.find(:all),:language_id, :language %>
+		<%= add_link "tambah",:languages, "lang", Language.new %>
+ 		<%= render :partial => "lang", 
+				:collection => @resume.languages %> 		
+ 	</div>
+	</fieldset>
+	
+<% form_for url_for(:action => "change_group" , :id => @message , :grup => :msgroup_id) do |f| %>
+	<p>
+	  <b>Msgroup:</b>
+	  
+	  <%= collection_select :message, 
+		:msgroup_id, User.find(@logon_uid).message_groups, 
+		:msgroup_id, :nama, {:include_blank => true}%>
+	  <%= f.submit "move group"%>
+	</p>
+
+<% end %>
+
+
+<p>Find me in app/views/user/testing/index.html.erb</p>

@@ -1,0 +1,32 @@
+
+<h2>Pencarian Berdasarkan project</h2>
+<% form_for :search, @searchproject, :url => url_for(:action => :search) do |f| -%>
+<%= hidden_field_tag :by, 'project' -%>
+<div class="edit">
+	<div class='title'>informasi project</div>
+	<div>
+		<div>judul project: </div>
+		<div><%= f.text_field :judul %></div>
+	</div>
+	<div>
+		<div>untuk perusahaan: </div>
+		<div><%= f.text_field :perusahaan %></div>
+	</div>
+	<div>
+		<div>lama pengerjaan: </div>
+		<div><%= f.text_field :lama_min, :value=> 0, :maxlength => 2 %>bulan - <%= f.text_field :lama_max, :value=> 0, :maxlength => 2 %>bulan</div>
+	</div>
+<%
+item = ""
+style = "display:inline-block;width:16%;"
+@tools.each do |t|
+	checkbox = check_box_tag "search[tool_ids][]",t.id
+	item += span_tag(checkbox+t.nama_tool,:style => style)
+end 
+%>
+<%= div_tag "Tool yang digunakan",:class => "title" %>
+<%= div_tag item,:class => "item" %>
+
+	<div class="center"><%= f.submit "Cari project" %></div>
+</div>
+<% end -%>

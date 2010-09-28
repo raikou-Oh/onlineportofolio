@@ -1,0 +1,28 @@
+	<% content_for :sidebar do || %>
+		<%= render :partial=> "sidebar" %> 
+		<%= link_to 'Back', user_messages_path %>     
+    <% end %>
+	
+<% form_for @message, :url => user_messages_path do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :use_user_id,:value => @logon_uid %>  
+  <table>
+  	<tr>
+  		<td width="20%">tujuan ke user: </td>
+		<td><%= text_field_tag :username,'',:size => 25, :maxlength => 25 %></td>
+  	</tr>
+	<tr>
+		<td><%= f.label :subjek %></td>
+		<td><%= f.text_field :subjek,:size => 100,:maxlength => 100 %></td>
+	</tr>
+	<tr>
+		<td colspan=2><%= f.label :pesan %><br>		
+			<%= f.text_area :pesan, :cols => 100 %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 valign="center"><%= f.submit 'Kirim' %></td>
+	</tr>
+  </table>
+<% end %>
+

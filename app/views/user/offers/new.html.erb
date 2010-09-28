@@ -1,0 +1,31 @@
+	<% content_for :sidebar do || %>
+		<%= render :partial=> "sidebar" %>		     
+    <% end %>
+<div class="info">
+	pesan ini akan dikirimkan kepada email yang dimasukkan.<br>
+	resume anda akan disertakan dalam isi email ini.
+</div>	
+<% form_for @offer, :url => user_offers_path do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :out,:value => true %>
+  <table>
+  	<tr>
+		<td><%= f.label :email %></td>
+		<td><%= f.text_field :email,:size => 50 %></td>
+	</tr>
+	<tr>
+		<td><%= f.label :subjek %></td>
+		<td><%= f.text_field :subjek,:size => 100 %></td>
+	</tr>
+	<tr>
+		<td colspan=2><%= f.label :pesan %><br>		
+			<%= f.text_area :pesan, :size => "100x20" %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 valign="center"><%= f.submit 'Kirim' %></td>
+	</tr>
+  </table>
+<% end %>
+
+

@@ -1,0 +1,122 @@
+	<% content_for :sidebar do || %>
+		<%= render :partial=> "sidebar" %>      
+    <% end %>
+	
+<% if resume = @resume %>
+
+<div >
+<%
+item = Array.new(8){Hash.new}
+item[0]["nama:"]=resume.nama
+item[1]["tanggal lahir:"]= resume.tanggal_lahir
+item[2]["alamat:"]= resume.alamat 
+item[3]["kota:"]= resume.kota 	
+item[4]["kode pos:"]= resume.kode_pos 	
+item[5]["telepon:"]= resume.telepon
+item[6]["jenis kelamin"]= resume.jenis_kelamin=="M"? "laki-laki" : "perempuan"
+item[7]["marital"]= resume.marital 	
+%>
+<% rows = create_row_div item,:class => "row" %>
+<%= div_tag "Data Diri", :class=>"title" %>
+<%= div_tag rows,:class=>"item" %>
+
+<%
+item = Array.new(8){Hash.new}
+item[0]["bidang:"] = resume.bidang
+%>
+<% rows = create_row_div item %>
+<%= div_tag "Pekerjaan",:class=>"title" %>
+<%= div_tag rows,:class=>"item" %>
+	
+<% unless resume.education_histories.blank? %>
+	<%
+	rows = ""
+	resume.education_histories.each do |edu|
+		item = Array.new(3){Hash.new}
+		item[0]["tahun:"] = "#{edu.awal} - #{edu.akhir}"
+		item[1]["sekolah:"] = "#{edu.tingkat}.#{edu.nama_sekolah}"
+		item[2]["nilai:"] = edu.nilai
+		rows += div_tag create_row_div(item).to_s
+	end
+	%>
+	<%= div_tag "Riwayat Pendidikan",:class=>"title" %>
+	<%= div_tag rows,:class=>"item" %>
+<% end %>
+
+<% unless resume.work_histories.blank? %>
+	<%
+	rows = ""
+	resume.work_histories.each do |work|
+		item = Array.new(3){Hash.new}
+		item[0]["tahun:"] = "#{work.awal} - #{work.akhir}"
+		item[1]["perusahaan:"] = work.perusahaan
+		item[2]["posisi:"] = work.posisi
+		item[3]["bidang:"] = work.bidang
+		rows += create_row_div(item).to_s
+	end
+	%>
+	<%= div_tag "Riwayat pekerjaan",:class=>"title" %>
+	<%= div_tag rows,:class=>"item" %>
+<% end %>
+
+<div>
+<%= div_tag "kemampuan",:class=>"title" %>
+	<% unless resume.languages.blank? %>
+	<div style="width:50%;">
+		<%
+		rows = create_row_div( [{"Tipe" => "Bahasa"}], :class => :title )
+		resume.languages.each do |lang|
+			rows += create_row_div([{lang.tipe => lang.language}])				
+		end
+		%>					
+		<%= div_tag "bahasa",:class=>"title" %>
+		<%= div_tag rows,:class=>"item" %>	
+	</div>	
+	<% end %>
+	
+	<% unless resume.tools.blank? %>
+	<div style="width:50%;">	
+		<%
+		rows = ""
+		resume.tools.each do |tool|
+			rows += div_tag tool.nama_tool				
+		end
+		%>
+		<%= div_tag "tool",:class=>"title" %>
+		<%= div_tag rows,:class=>"item" %>	
+	</div>	
+	<% end %>	
+</div>
+	
+<% unless resume.certifications.blank? %>
+	<%
+	rows = ""
+	resume.certifications.each do |cf|
+		item = Array.new(3){Hash.new}
+		item[0]["dikeluarkan:"] = cf.oleh
+		item[1]["judul:"] = cf.judul
+		item[2]["tahun:"] = cf.tahun
+		rows += create_row_div(item).to_s
+	end
+	%>
+	<%= div_tag "Sertifikasi",:class=>"title" %>
+	<%= div_tag rows,:class=>"item" %>	
+<% end %>
+
+<% unless resume.generals.blank? %>
+	<%
+	rows = ""
+	resume.generals.each do |gen|
+		item = Array.new(3){Hash.new}
+		item[0]["awal:"] = gen.awal
+		item[1]["akhir:"] = gen.akhir
+		item[2][gen.judul] = gen.deskripsi		
+		rows += create_row_div(item).to_s
+	end
+	%>
+	<%= div_tag "informasi lain",:class=>"title" %>
+	<%= div_tag rows,:class=>"item" %>	
+<% end %>
+
+<% end %>
+</div>

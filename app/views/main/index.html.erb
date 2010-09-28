@@ -1,0 +1,121 @@
+<style type="text/css">
+body{
+	background:#0071BC url(/images/main/backg.gif) top left repeat-x;
+	margin:0;
+	padding:0;
+}
+#wrapper{
+	min-width:740px;
+	width:900px;
+	margin:0 auto;
+	padding:0 50px;
+	background:#0071BC url(/images/main/backg.gif) top center repeat-x;
+}
+#content div{position:absolute;}
+#content a{
+	display:block;
+	overflow:hidden;
+	text-indent:-400px;
+}
+#header{
+	background:#f1dd04;
+	color:#DDDDDD;
+	height:40px;
+	margin:auto 0;
+}
+#content{
+	position:relative;
+	margin:0 auto;
+}
+#logo{top:115;left:50%;margin-left:-150px;}
+
+#reg{top:30;left:185;}
+#reg a{
+	width:200px;
+	height:75px;
+	background:url(/images/main/register.png) no-repeat;
+}
+#forgot{top:10;left:600;}
+#forgot a{
+	width:200px;
+	height:60px;
+	background:url(/images/main/forgot.png) no-repeat;
+}
+#about{top:360;left:125;}
+#about a{
+	width:190px;
+	height:83px;
+	background:url(/images/main/about.png) no-repeat;	
+}
+#adv{top:350;left:650;}
+#adv a{	
+	width:230px;
+	height:156px;
+	background:url(/images/main/adv.png) no-repeat;	
+}
+#header{width:100%;min-width:740px;}
+#header tr,td{padding:0;margin:0;text-align:right;}
+#header table{
+	width:100%;
+	height:100%;
+	border-collapse:collapse;
+}
+
+#login{
+	background:url(/images/border.png) no-repeat;
+	width:160px;
+	height:130px;
+	top:150;
+	left:-50;
+	padding:35px 40px 40px 55px;
+}
+#login .inner{font:"Bookman Old Style";font-size:15pt;}
+#login .inner2{font:"Times New Roman";font-size:20pt;}
+#login div{	
+	position:relative;
+	color:white;
+	margin:0 0 10px 0;
+	text-transform:capitalize;
+}
+#login a{text-indent:0;color:white;text-decoration:underline;}
+</style>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Halaman Utama</title>
+	</head>
+	<body>
+<div id="wrapper">
+		<div id="content">
+			
+			<div id="about"><%= link_to "tentang situs", user_page_path %></div>
+			<div id="adv"><%= link_to "pencarian lanjut", search_url %></div>
+		<% unless session[:uid] -%>
+			<div id="reg"><%= link_to "pendaftaran", register_url %></div>
+			<div id="forgot">
+				<%= link_to image_tag("main/forgot.png", :size => "200x50" ),forgot_pass_url %>
+			</div>		
+		<% end -%>
+			<div id=logo>
+				<%= image_tag "logo.png",:size => "300x150" %>
+			</div>
+			<div id="login">
+				<% unless session[:uid] -%>					
+					<% form_tag(:action=> "login", :controller => "administrasi") do -%>
+						<div>username:<br /><%= text_field_tag :uname,'',:size => "20",:maxlength => '15' %></div>
+						<div>kata sandi:<br /><%= password_field_tag :pass,'' %></div>
+						<div><%= submit_tag 'Login' %></div>
+					<% end -%>
+				<% else -%>
+				<div><div class="inner">Selamat datang!!</div>
+					<div class="inner2"><b><%= link_to 'Halaman User',user_page_path %></b></div>
+					<b><%= link_to 'Logout',logout_path %></b>
+				</div>
+				
+				<% end -%>
+			</div>
+		</div>
+</div>
+	</body>
+</html>
